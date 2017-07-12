@@ -1,0 +1,96 @@
+{
+	"employees": [
+		{
+			"id": 1,
+			"name": "John Smith",
+			"location": ["VIC"],
+			"intervals": [
+				{
+					"startHour": 8,
+					"startMinute": 0,
+					"endHour": 12,
+					"endMinute": 0
+				},
+				{
+					"startHour": 13,
+					"startMinute": 0,
+					"endHour": 17,
+					"endMinute": 0
+				}
+			],
+			"skills": [
+				{
+					"name": "Tier 1"
+				},
+				{
+					"name": "Tier 2"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"name": "Jane Doe",
+			"location": ["VIC2"],
+			"intervals": [
+				{
+					"startHour": 9,
+					"startMinute": 0,
+					"endHour": 13,
+					"endMinute": 0
+				},
+				{
+					"startHour": 14,
+					"startMinute": 0,
+					"endHour": 18,
+					"endMinute": 0
+				}
+			],
+			"skills": [
+				{
+					"name": "Tier 3"
+				}
+			]
+		}
+	],
+	"tasks": [
+		{
+			"name": "Inbound - Advisor",
+			"location":"VIC",
+			"requiredSkill": {
+				"name": "Tier 1"
+			},
+			"startTime": {
+				"startHour": 8,
+				"startMinute": 0,
+				"endHour": 12,
+				"endMinute": 0
+			}
+		},
+		{
+			"name": "Inbound - Advisor2",
+			"location":"VIC",
+			"requiredSkill": {
+				"name": "Tier 2"
+			},
+			"startTime": {
+				"startHour": 9,
+				"startMinute": 0,
+				"endHour": 18,
+				"endMinute": 0
+			}
+		},
+		{
+			"name": "Inbound – New Business",
+			"location":"VIC",
+			"requiredSkill": {
+				"name": "Tier 2"
+			},
+			"startTime": {
+				"startHour": 13,
+				"startMinute": 0,
+				"endHour": 17,
+				"endMinute": 0
+			}
+		}
+	]
+}

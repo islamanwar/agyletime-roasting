@@ -1,0 +1,48 @@
+package com.islam.optaplanner.roasting;
+
+import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
+import com.agyletime.planning.roasting.model.Employee;
+import com.agyletime.planning.roasting.model.Task;
+import com.agyletime.planning.roasting.model.TaskConflict;
+
+global HardMediumSoftScoreHolder scoreHolder;
+
+//#############################################################################
+//######################### HARD CONSTRAINTS ##################################
+//#############################################################################
+rule "taskLocationMatchesEmployeeLocation"
+
+	when
+		$employee : Employee()
+		$task : Task(employee == $employee, !$employee.hasLocation($task.location))
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -1);
+	end
+	
+rule "employeeAvailableToWork"
+	when
+		$task : Task(employee != null, !employee.worksDuring(interval))
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -1);
+	end
+	
+rule "conflictingTasksForEmployee"
+	when
+		$conflict: TaskConflict($leftTask : leftTask, $rightTask : rightTask)
+		$employee : Employee()
+		Task(this == $leftTask, employee == $employee)
+		Task(this == $rightTask, employee == $employee)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -1);
+	end
+	
+//#############################################################################
+//######################### MEDIUM CONSTRAINTS ################################
+//#############################################################################
+	
+rule "taskWithNoEmployee"
+	when 
+		Task(employee == null)
+	then
+		scoreHolder.addMediumConstraintMatch(kcontext, -1);
+	end

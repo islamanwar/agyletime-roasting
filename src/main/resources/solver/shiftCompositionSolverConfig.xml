@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+	
+	<!-- Domain model configuration -->
+	<scanAnnotatedClasses>
+    <packageInclude>com.agyletime.planning.roasting</packageInclude>
+  </scanAnnotatedClasses>
+  
+  <!-- Score configuration -->
+  <scoreDirectorFactory>
+  	<!-- 
+  	<easyScoreCalculatorClass>com.agyletime.planning.roasting.score.ShiftCompositionCalculator</easyScoreCalculatorClass>
+  	 -->
+  	 <scoreDrl>solver/shiftCompositionScoreRules.drl</scoreDrl>
+  </scoreDirectorFactory>
+  
+  <!-- Optimization algorithms configuration -->
+  <termination>
+    <secondsSpentLimit>2</secondsSpentLimit>
+  </termination>
+  
+</solver>
