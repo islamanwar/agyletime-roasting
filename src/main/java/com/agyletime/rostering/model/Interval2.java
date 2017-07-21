@@ -1,14 +1,14 @@
-package com.agyletime.planning.roasting.model;
+package com.agyletime.rostering.model;
 
-public class Interval {
+public class Interval2 {
 
 	private int startHour;
 	private int startMinute;
 	private int endHour;
 	private int endMinute;
 
-	public static Interval newInstance(int startHour, int startMinute, int endHour, int endMinute) {
-		Interval interval = new Interval();
+	public static Interval2 newInstance(int startHour, int startMinute, int endHour, int endMinute) {
+		Interval2 interval = new Interval2();
 
 		interval.startHour = startHour;
 		interval.startMinute = startMinute;
@@ -50,7 +50,7 @@ public class Interval {
 		this.endMinute = endMinute;
 	}
 
-	public boolean contains(Interval interval2) {
+	public boolean contains(Interval2 interval2) {
 		return (this.startHour < interval2.startHour
 				|| (this.startHour == interval2.startHour && this.startMinute <= interval2.startMinute))
 				&& (this.endHour > interval2.endHour
@@ -69,23 +69,23 @@ public class Interval {
 	 * @param interval2
 	 * @return
 	 */
-	public boolean intersects(Interval interval2) {
+	public boolean intersects(Interval2 interval2) {
 
 		return contains(interval2.getStartHour(), interval2.getStartMinute())
 				|| contains(interval2.getEndHour(), interval2.getEndMinute());
 	}
 
-	public boolean startsBefore(Interval interval2) {
+	public boolean startsBefore(Interval2 interval2) {
 		return (this.startHour < interval2.startHour)
 				|| (this.startHour == interval2.startHour && this.startMinute < interval2.startMinute);
 	}
 
-	public boolean endsAfter(Interval interval2) {
+	public boolean endsAfter(Interval2 interval2) {
 		return (this.endHour > interval2.endHour)
 				|| (this.endHour == interval2.endHour && this.endMinute > interval2.endMinute);
 	}
 
-	public boolean endsBefore(Interval interval2) {
+	public boolean endsBefore(Interval2 interval2) {
 		return (this.endHour < interval2.endHour)
 				|| (this.endHour == interval2.endHour && this.endMinute <= interval2.endMinute);
 	}

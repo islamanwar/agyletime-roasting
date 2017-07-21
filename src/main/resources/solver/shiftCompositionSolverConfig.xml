@@ -3,13 +3,13 @@
 	
 	<!-- Domain model configuration -->
 	<scanAnnotatedClasses>
-    <packageInclude>com.agyletime.planning.roasting</packageInclude>
+    <packageInclude>com.agyletime.rostering</packageInclude>
   </scanAnnotatedClasses>
   
   <!-- Score configuration -->
   <scoreDirectorFactory>
   	<!-- 
-  	<easyScoreCalculatorClass>com.agyletime.planning.roasting.score.ShiftCompositionCalculator</easyScoreCalculatorClass>
+  	<easyScoreCalculatorClass>com.agyletime.rostering.score.ShiftCompositionCalculator</easyScoreCalculatorClass>
   	 -->
   	 <scoreDrl>solver/shiftCompositionScoreRules.drl</scoreDrl>
   </scoreDirectorFactory>

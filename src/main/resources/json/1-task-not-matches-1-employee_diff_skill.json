@@ -1,0 +1,41 @@
+{
+	"date":"2017-07-21",
+	"employees": [
+		{
+			"id": 1,
+			"name": "John Smith",
+			"locations": [
+				"VIC"
+			],
+			"intervals": [
+				{
+					"startTime": "2017-07-21T08:00:00.000Z",
+					"endTime": "2017-07-21T13:00:00.000Z"
+				},
+				{
+					"startTime": "2017-07-21T14:00:00.000Z",
+					"endTime": "2017-07-21T17:00:00.000Z"
+				}
+			],
+			"skills": [
+				{
+					"name": "Skill 1"
+				}
+			]
+		}
+	],
+	"tasks": [
+		{
+			"id": 1,
+			"name": "Inbound - Advisor",
+			"location": "VIC",
+			"requiredSkill": {
+				"name": "Custom Skill"
+			},
+			"interval": {
+				"startTime": "2017-07-21T08:00:00.000Z",
+				"endTime": "2017-07-21T13:00:00.000Z"
+			}
+		}
+	]
+}

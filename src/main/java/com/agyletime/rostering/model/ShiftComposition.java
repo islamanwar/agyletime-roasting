@@ -1,6 +1,7 @@
-package com.agyletime.planning.roasting.model;
+package com.agyletime.rostering.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
@@ -12,6 +13,8 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore
 
 @PlanningSolution
 public class ShiftComposition {
+	
+	private Date date;
 
 	private List<Employee> employees;
 
@@ -20,6 +23,14 @@ public class ShiftComposition {
 	private HardMediumSoftScore score;
 
 	public ShiftComposition() {
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	ShiftComposition(List<Employee> employees, List<Task> tasks) {
@@ -81,7 +92,10 @@ public class ShiftComposition {
 
 	@Override
 	public String toString() {
-		return "ShiftComposition [employees=" + employees + ", tasks=" + tasks + ", score=" + score + "]";
+		return "ShiftComposition [date=" + date + ", employees=" + employees + ", tasks=" + tasks + ", score=" + score
+				+ "]";
 	}
+
+	
 
 }

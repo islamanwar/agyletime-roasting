@@ -1,4 +1,4 @@
-package com.agyletime.planning.roasting.model;
+package com.agyletime.rostering.model;
 
 public class Skill {
 

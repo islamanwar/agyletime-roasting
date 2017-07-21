@@ -1,9 +1,9 @@
 package com.islam.optaplanner.roasting;
 
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
-import com.agyletime.planning.roasting.model.Employee;
-import com.agyletime.planning.roasting.model.Task;
-import com.agyletime.planning.roasting.model.TaskConflict;
+import com.agyletime.rostering.model.Employee;
+import com.agyletime.rostering.model.Task;
+import com.agyletime.rostering.model.TaskConflict;
 
 global HardMediumSoftScoreHolder scoreHolder;
 
@@ -18,10 +18,19 @@ rule "taskLocationMatchesEmployeeLocation"
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -1);
 	end
-	
+
+rule "employeeHasTaskSkill"
+
+	when
+		$employee : Employee()
+		$task : Task(employee == $employee, !$employee.hasSkill($task.requiredSkill))
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -1);
+	end
+
 rule "employeeAvailableToWork"
 	when
-		$task : Task(employee != null, !employee.worksDuring(interval))
+		$task : Task(employee != null, !employee.worksDuring(this))
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -1);
 	end

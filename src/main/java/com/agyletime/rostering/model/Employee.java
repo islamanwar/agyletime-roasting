@@ -1,4 +1,4 @@
-package com.agyletime.planning.roasting.model;
+package com.agyletime.rostering.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,19 +9,18 @@ public class Employee {
 	private String name;
 	private List<String> locations;
 	private Interval[] intervals;
-	private Skill[] skills;
+	private List<Skill> skills;
 
-	public boolean worksDuring(Interval interval2) {
+	public boolean worksDuring(Task task) {
 		
 		boolean worksDuring = false;
 		for (Interval interval : intervals) {
-			if(interval.contains(interval2)){
+			if(interval.contains(task.getInterval())){
 				worksDuring = true;
 				break;
 			}
 		}
 		return worksDuring;
-		
 	}
 
 	public boolean hasLocation(String location) {
@@ -30,6 +29,14 @@ public class Employee {
 			hasLocation = locations.contains(location);
 		}
 		return hasLocation;
+	}
+	
+	public boolean hasSkill(Skill skill) {
+		boolean hasSkill = false;
+		if (skills != null && !skills.isEmpty()) {
+			hasSkill = skills.contains(skill);
+		}
+		return hasSkill;
 	}
 
 	public long getId() {
@@ -48,7 +55,7 @@ public class Employee {
 		return intervals;
 	}
 
-	public Skill[] getSkills() {
+	public List<Skill> getSkills() {
 		return skills;
 	}
 
@@ -68,14 +75,16 @@ public class Employee {
 		this.intervals = intervals;
 	}
 
-	public void setSkills(Skill[] skill) {
+	public void setSkills(List<Skill> skill) {
 		this.skills = skill;
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", locations=" + locations + ", intervals="
-				+ Arrays.toString(intervals) + ", skills=" + Arrays.toString(skills) + "]";
+				+ Arrays.toString(intervals) + ", skills=" + skills + "]";
 	}
+
+	
 
 }

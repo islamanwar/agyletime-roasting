@@ -1,4 +1,4 @@
-package com.agyletime.planning.roasting.score;
+package com.agyletime.rostering.score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 
-import com.agyletime.planning.roasting.model.Employee;
-import com.agyletime.planning.roasting.model.Interval;
-import com.agyletime.planning.roasting.model.ShiftComposition;
-import com.agyletime.planning.roasting.model.Task;
+import com.agyletime.rostering.model.Employee;
+import com.agyletime.rostering.model.Interval;
+import com.agyletime.rostering.model.ShiftComposition;
+import com.agyletime.rostering.model.Task;
 
 public class ShiftCompositionCalculator implements EasyScoreCalculator<ShiftComposition> {
 	private static long COUNT = 0;

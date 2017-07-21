@@ -1,4 +1,6 @@
-package com.agyletime.planning.roasting.model;
+package com.agyletime.rostering.model;
+
+import java.util.Date;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
@@ -7,6 +9,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 public class Task {
 
 	private int id;
+	private Date date;
 	private Skill requiredSkill;
 	private String location;
 	private Interval interval;
@@ -15,6 +18,10 @@ public class Task {
 
 	public int getId() {
 		return id;
+	}
+
+	public Date getDate() {
+		return date;
 	}
 
 	public Skill getRequiredSkill() {
@@ -31,6 +38,10 @@ public class Task {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public void setRequiredSkill(Skill requiredSkill) {
@@ -56,8 +67,10 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", requiredSkill=" + requiredSkill + ", location=" + location + ", interval="
-				+ interval + ", employee=" + employee + "]";
+		return "Task [id=" + id + ", date=" + date + ", requiredSkill=" + requiredSkill + ", location=" + location
+				+ ", interval=" + interval + ", employee=" + employee + "]";
 	}
+
+	
 
 }
