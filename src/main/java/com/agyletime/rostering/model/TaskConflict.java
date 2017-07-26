@@ -1,7 +1,9 @@
 package com.agyletime.rostering.model;
 
 /**
- * Calculated during initialization, not modified during score calculation.
+ * A task conflict is a collision between 2 tasks occurring at intersecting intervals.
+ * 2 conflicting tasks can't be assigned to the same Employee
+ * Task conflict is calculated during initialization and not modified during score calculation.
  */
 public class TaskConflict {
 

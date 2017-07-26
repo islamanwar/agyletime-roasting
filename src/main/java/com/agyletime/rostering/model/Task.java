@@ -4,11 +4,14 @@ import java.util.Date;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.agyletime.rostering.rest.custom.*;
 
 @PlanningEntity
 public class Task {
 
 	private int id;
+	@JsonSerialize(using=JsonDateSerializer.class)
 	private Date date;
 	private Skill requiredSkill;
 	private String location;

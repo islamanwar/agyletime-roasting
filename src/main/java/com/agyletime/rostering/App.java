@@ -3,13 +3,9 @@ package com.agyletime.rostering;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 
-import com.agyletime.roasting.AppTest;
 import com.agyletime.rostering.model.ShiftComposition;
 import com.agyletime.rostering.model.Task;
 import com.google.gson.Gson;
@@ -20,7 +16,7 @@ import com.google.gson.GsonBuilder;
  *
  */
 public class App {
-	
+	/*
 	public static final String SOLVER_CONFIG = "solver/shiftCompositionSolverConfig.xml";
 	
 	public static void main(String[] args) {
@@ -49,4 +45,5 @@ public class App {
 		ShiftComposition solvedShiftComposition =solver.solve(shiftComposition);
 		System.out.println(gson.toJson(solvedShiftComposition.getTasks()));
 	}
+	*/
 }
