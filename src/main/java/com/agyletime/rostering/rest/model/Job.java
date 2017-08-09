@@ -25,6 +25,9 @@ public class Job implements Serializable {
 
 	@Column(name = "NAME")
 	private String name;
+	
+	@Column(name = "CALLBACK_URI")
+	private String callbackUri;
 
 	@Column(name = "EXTRA_DETAILS")
 	private String extraDetails;
@@ -69,6 +72,16 @@ public class Job implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public String getCallbackUri() {
+		return callbackUri;
+	}
+
+	public void setCallbackUri(String callbackUri) {
+		this.callbackUri = callbackUri;
 	}
 
 	public String getExtraDetails() {

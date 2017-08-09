@@ -2,6 +2,7 @@ package com.agyletime.rostering.rest.custom;
 
 import java.util.Date;
 
+import org.drools.core.util.StringUtils;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import com.agyletime.rostering.model.ShiftComposition;
 import com.agyletime.rostering.rest.controller.SchedulingController;
 import com.agyletime.rostering.rest.model.Job;
 import com.agyletime.rostering.rest.repository.JobRepository;
+import com.agyletime.rostering.util.Utils;
 import com.google.gson.Gson;
 
 @Component
@@ -37,7 +39,7 @@ public class JobRunnable implements Runnable {
 		if (runningJob == null) {
 			// Job not found in the database
 			LOGGER.error("Job ID #" + jobID + " Not found in db.");
-			return ;
+			return;
 		}
 		try {
 			// Prepare initial job state
@@ -46,9 +48,7 @@ public class JobRunnable implements Runnable {
 
 			// Save task state before execution
 			runningJob = repository.save(runningJob);
-			
-			Thread.sleep(60000);
-			
+
 			// Start actual execution
 			ShiftComposition solvedShiftComposition = new ShiftComposition();
 			SolverFactory<ShiftComposition> solverFactory = SolverFactory.createFromXmlResource(SOLVER_CONFIG);
@@ -62,17 +62,40 @@ public class JobRunnable implements Runnable {
 
 			// Save task state after execution
 			repository.save(runningJob);
-			
+
 			JobManager.CURRRNT_JOBS.remove(jobID);
-		} catch (InterruptedException ignored) {
-			//Thread was cancelled probably by Cancel API call. do nothing
-		}catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
-			//Update job with the failed status
-			runningJob.setStatus(Job.Status.FAILED);
-			runningJob.setExtraDetails(e.getMessage());
-			runningJob.setEndDate(new Date());
-			repository.save(runningJob);
+
+			// Call callback uri
+			if (!StringUtils.isEmpty(runningJob.getCallbackUri())) {
+				try {
+					Utils.sendPost(runningJob.getCallbackUri() + "?jobId=" + jobID + "&status=SUCCESS");
+				} catch (Exception ex) {
+					LOGGER.error("Error while calling callback uri", ex);
+				}
+			}
+
+		} catch (Exception e) {
+			if (e instanceof InterruptedException) {
+				// Thread was cancelled probably by Cancel API call. do nothing
+			} else {
+				LOGGER.error(e.getMessage(), e);
+				// Update job with the failed status
+				runningJob.setStatus(Job.Status.FAILED);
+				runningJob.setExtraDetails(e.getMessage());
+				runningJob.setEndDate(new Date());
+				repository.save(runningJob);
+				
+				// Call callback uri
+				if (!StringUtils.isEmpty(runningJob.getCallbackUri())) {
+					
+					try {
+						Utils.sendPost(runningJob.getCallbackUri() + "?jobId=" + jobID + "&status=FAILED");
+					} catch (Exception ex) {
+						LOGGER.error("Error while calling callback uri", ex);
+					}
+				}
+			}
+
 		}
 	}
 

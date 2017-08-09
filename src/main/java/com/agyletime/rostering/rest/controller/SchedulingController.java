@@ -29,6 +29,7 @@ import com.agyletime.rostering.rest.repository.JobRepository;
 import com.agyletime.rostering.rest.response.BaseResponse;
 import com.agyletime.rostering.rest.response.JobResponse;
 import com.agyletime.rostering.rest.response.JobsResponse;
+import com.agyletime.rostering.util.Utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -61,7 +62,7 @@ public class SchedulingController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
-	public ResponseEntity<? extends BaseResponse> schedule(@RequestBody(required = false) String body) {
+	public ResponseEntity<? extends BaseResponse> schedule(@RequestParam(name = "callback", required = false) String callbackUri, @RequestBody(required = false) String body) {
 
 		// Validate request body not empty
 		if (StringUtils.isEmpty(body)) {
@@ -78,6 +79,10 @@ public class SchedulingController {
 			return new ResponseEntity<BaseResponse>(
 					new BaseResponse(HttpStatus.BAD_REQUEST.ordinal(), "Bad Request Body"), HttpStatus.BAD_REQUEST);
 		}
+		if(!StringUtils.isEmpty(callbackUri) && !Utils.validateUrl(callbackUri)) {
+			return new ResponseEntity<BaseResponse>(
+					new BaseResponse(HttpStatus.BAD_REQUEST.ordinal(), "Invalid Callback uri"), HttpStatus.BAD_REQUEST);
+		}
 		// Set task's date to the date sent with the request
 		/*
 		 * TODO set task date when results are available List<Task> tasks =
@@ -88,7 +93,7 @@ public class SchedulingController {
 		 */
 		long jobId = -1;
 		try {
-			jobId = jobManager.submitJob(shiftComposition);
+			jobId = jobManager.submitJob(shiftComposition, callbackUri);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new ResponseEntity<BaseResponse>(new BaseResponse(HttpStatus.INTERNAL_SERVER_ERROR.ordinal(),

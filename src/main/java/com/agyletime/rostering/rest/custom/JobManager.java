@@ -49,14 +49,16 @@ public class JobManager {
 		taskExecutor.setMaxPoolSize(100);
 	
 	}
-	public long submitJob(final ShiftComposition shiftComposition) {
+	public long submitJob(final ShiftComposition shiftComposition, String callbackUri) {
 		if (shiftComposition == null)
 			throw new NullPointerException();
 		
 		try {
 			//Create job instance to be saved in the db
 			Job givenJob = new Job();
+			
 			givenJob.setName(shiftComposition.getName());
+			givenJob.setCallbackUri(callbackUri);
 			givenJob.setTaskDate(shiftComposition.getDate());
 			givenJob.setStatus(Job.Status.CREATED);
 			givenJob.setInput(sGson.toJson(shiftComposition));
