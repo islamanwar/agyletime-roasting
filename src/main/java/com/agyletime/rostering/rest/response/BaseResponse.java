@@ -6,7 +6,15 @@ public class BaseResponse {
 	private String status;
 	private String message;
 	
-	
+	public BaseResponse() {
+		this(200, "SUCCESS", "SUCCESS");
+	}
+	public BaseResponse(int code, String status) {
+		super();
+		this.code = code;
+		this.status = status;
+		this.message = status;
+	}
 	public BaseResponse(int code, String status, String message) {
 		super();
 		this.code = code;

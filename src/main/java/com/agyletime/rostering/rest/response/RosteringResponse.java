@@ -9,9 +9,6 @@ public class RosteringResponse extends BaseResponse {
 	private Object tasks;
 	private Object error;
 
-	public RosteringResponse() {
-		super(200, "SUCCESS", "SUCCESS");
-	}
 
 	public Object getTasks() {
 		return tasks;

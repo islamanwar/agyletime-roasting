@@ -14,6 +14,8 @@ import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore
 @PlanningSolution
 public class ShiftComposition {
 	
+	private String name;
+	
 	private Date date;
 
 	private List<Employee> employees;
@@ -24,6 +26,21 @@ public class ShiftComposition {
 
 	public ShiftComposition() {
 	}
+	
+	public ShiftComposition(List<Employee> employees, List<Task> tasks) {
+		this.employees = employees;
+		this.tasks = tasks;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	public Date getDate() {
 		return date;
@@ -31,11 +48,6 @@ public class ShiftComposition {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	ShiftComposition(List<Employee> employees, List<Task> tasks) {
-		this.employees = employees;
-		this.tasks = tasks;
 	}
 
 	@ProblemFactCollectionProperty
